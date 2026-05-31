@@ -2667,19 +2667,29 @@ TextColor3="Text",
 TextSize=20,
 })
 
-local as=ac("TextLabel",{
-AutomaticSize="XY",
+local as=ac("ImageButton",{
 BackgroundTransparency=1,
-Text="Key System",
+Size=UDim2.new(0,22,0,22),
 AnchorPoint=Vector2.new(1,0.5),
 Position=UDim2.new(1,0,0.5,0),
-TextTransparency=1,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
+Image=ab.Icon"message-circle"[1],
+ImageRectSize=ab.Icon"message-circle"[2].ImageRectSize,
+ImageRectOffset=ab.Icon"message-circle"[2].ImageRectPosition,
+ImageTransparency=0.3,
 ThemeTag={
-TextColor3="Text",
+ImageColor3="Text",
 },
-TextSize=16,
 })
+
+ab.AddSignal(as.MouseButton1Click,function()
+setclipboard("https://discord.gg/YOURINVITE")
+ag.WindUI:Notify({
+Title="Discord",
+Content="Invite link copied to clipboard!",
+Icon="message-circle",
+Duration=3,
+})
+end)
 
 local at=ac("Frame",{
 BackgroundTransparency=1,
