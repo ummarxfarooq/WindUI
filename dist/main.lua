@@ -3079,7 +3079,7 @@ if ag.KeySystem.KeyValidator then
         end
     else
         ag.WindUI:Notify{
-            Title="Key System. Error",
+            Title="Key System Error!",
             Content=errMsg or "Invalid key.",
             Icon="triangle-alert",
         }
