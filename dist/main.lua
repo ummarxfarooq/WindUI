@@ -2672,9 +2672,9 @@ BackgroundTransparency=1,
 Size=UDim2.new(0,22,0,22),
 AnchorPoint=Vector2.new(1,0.5),
 Position=UDim2.new(1,0,0.5,0),
-Image=ab.Icon"message-circle"[1],
-ImageRectSize=ab.Icon"message-circle"[2].ImageRectSize,
-ImageRectOffset=ab.Icon"message-circle"[2].ImageRectPosition,
+Image=ab.Icon"geist:logo-discord"[1],
+ImageRectSize=ab.Icon"geist:logo-discord"[2].ImageRectSize,
+ImageRectOffset=ab.Icon"geist:logo-discord"[2].ImageRectPosition,
 ImageTransparency=0.3,
 ThemeTag={
 ImageColor3="Text",
@@ -2682,11 +2682,11 @@ ImageColor3="Text",
 })
 
 ab.AddSignal(as.MouseButton1Click,function()
-setclipboard("https://discord.gg/YOURINVITE")
+setclipboard("https://discord.gg/XV66VWqAaN")
 ag.WindUI:Notify({
 Title="Discord",
 Content="Invite link copied to clipboard!",
-Icon="message-circle",
+Icon="geist:logo-discord",
 Duration=3,
 })
 end)
