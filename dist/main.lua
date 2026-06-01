@@ -2718,7 +2718,7 @@ at,
 as,
 })
 
-local av=af("Enter Key","key",nil,"Input",function(av)
+local av=af("Enter Key","user-key",nil,"Input",function(av)
 an=av
 end)
 
@@ -2822,7 +2822,7 @@ PaddingBottom=UDim.new(0,16),
 
 
 
-local az=ae("Exit","log-out",function()
+local az=ae("Exit","x",function()
 al:Close()()
 end,"Tertiary",ax.Frame)
 
@@ -3024,9 +3024,10 @@ end)
 ab.AddSignal(v.MouseButton1Click,function()
 r.Copy()
 ag.WindUI:Notify{
-Title="Key System",
-Content="Key link copied to clipboard.",
-Image="key",
+    Title="Get Key",
+    Content="Link copied to clipboard!",
+    Icon="link",
+    Duration=3,
 }
 end)
 end
@@ -3063,7 +3064,7 @@ task.wait(0.4)
 ai(true)
 end
 
-local aA=ae("Submit","arrow-right",function()
+local aA=ae("Submit","circle-check-big",function()
 local aA=tostring(an or"empty")local aB=
 ag.Folder or ag.Title
 
@@ -3118,7 +3119,7 @@ Icon="triangle-alert",
 }
 end
 end
-end,"Primary",ax)
+end,"Secondary",ax)
 
 aA.AnchorPoint=Vector2.new(1,0.5)
 aA.Position=UDim2.new(1,0,0.5,0)
