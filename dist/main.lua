@@ -2669,7 +2669,7 @@ TextSize=20,
 
 local as=ac("ImageButton",{
 BackgroundTransparency=1,
-Size=UDim2.new(0,22,0,22),
+Size=UDim2.new(0,30,0,30),
 AnchorPoint=Vector2.new(1,0.5),
 Position=UDim2.new(1,0,0.5,0),
 Image=ab.Icon"geist:logo-discord"[1],
@@ -2835,7 +2835,13 @@ end
 
 if ag.KeySystem.URL then
 ae("Get key","key",function()
-setclipboard(ag.KeySystem.URL)
+    setclipboard(ag.KeySystem.URL)
+    ag.WindUI:Notify{
+        Title="Get Key",
+        Content="Link copied to clipboard!",
+        Icon="link",
+        Duration=3,
+    }
 end,"Secondary",ax.Frame)
 end
 
