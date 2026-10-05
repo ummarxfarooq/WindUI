@@ -7454,24 +7454,85 @@ local ac=aa.New
 local ae={}
 
 function ae.New(af,ag)
-local ah=ac("Frame",{
-Size=ag.ParentType~="Group"and UDim2.new(1,0,0,1)or UDim2.new(0,1,1,0),
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-BackgroundTransparency=.9,
-ThemeTag={
-BackgroundColor3="Text"
-}
-})
-local ai=ac("Frame",{
-Parent=ag.Parent,
-Size=ag.ParentType~="Group"and UDim2.new(1,-7,0,7)or UDim2.new(0,7,1,-7),
-BackgroundTransparency=1,
-},{
-ah
-})
+	local title=ag.Title or ag.Text
 
-return"Divider",{__type="Divider",ElementFrame=ai}
+	if title and title~=""then
+		local ah=ac("TextLabel",{
+			BackgroundTransparency=1,
+			Text=title,
+			TextSize=ag.TextSize or 13,
+			TextTransparency=ag.TextTransparency or 0.4,
+			FontFace=Font.new(aa.Font,ag.FontWeight or Enum.FontWeight.Medium),
+			AutomaticSize="X",
+			Size=UDim2.new(0,0,1,0),
+			ThemeTag={TextColor3="Text"},
+		})
+
+		local ai=ac("Frame",{BackgroundTransparency=1,Size=UDim2.new(0,0,1,0)},{
+			ac("Frame",{
+				Size=UDim2.new(1,0,0,1),
+				AnchorPoint=Vector2.new(0,0.5),
+				Position=UDim2.new(0,0,0.5,0),
+				BackgroundTransparency=0.9,
+				ThemeTag={BackgroundColor3="Text"},
+			})
+		})
+
+		local aj=ac("Frame",{BackgroundTransparency=1,Size=UDim2.new(0,0,1,0)},{
+			ac("Frame",{
+				Size=UDim2.new(1,0,0,1),
+				AnchorPoint=Vector2.new(0,0.5),
+				Position=UDim2.new(0,0,0.5,0),
+				BackgroundTransparency=0.9,
+				ThemeTag={BackgroundColor3="Text"},
+			})
+		})
+
+		local ak=ac("Frame",{
+			BackgroundTransparency=1,
+			Size=UDim2.new(1,0,1,0),
+		},{
+			ac("UIListLayout",{
+				FillDirection="Horizontal",
+				VerticalAlignment="Center",
+				Padding=UDim.new(0,8),
+			}),
+			ai,ah,aj,
+		})
+
+		local function update()
+			local l=math.max(0,(ak.AbsoluteSize.X-ah.AbsoluteSize.X-16)/2)
+			ai.Size=UDim2.new(0,l,1,0)
+			aj.Size=UDim2.new(0,l,1,0)
+		end
+
+		aa.AddSignal(ah:GetPropertyChangedSignal"AbsoluteSize",update)
+		aa.AddSignal(ak:GetPropertyChangedSignal"AbsoluteSize",update)
+		task.defer(update)
+
+		local al=ac("Frame",{
+			Parent=ag.Parent,
+			Size=UDim2.new(1,-7,0,24),
+			BackgroundTransparency=1,
+		},{ak})
+
+		return"Divider",{__type="Divider",ElementFrame=al}
+	end
+
+	local ah=ac("Frame",{
+		Size=ag.ParentType~="Group"and UDim2.new(1,0,0,1)or UDim2.new(0,1,1,0),
+		Position=UDim2.new(0.5,0,0.5,0),
+		AnchorPoint=Vector2.new(0.5,0.5),
+		BackgroundTransparency=.9,
+		ThemeTag={BackgroundColor3="Text"}
+	})
+	local ai=ac("Frame",{
+		Parent=ag.Parent,
+		Size=ag.ParentType~="Group"and UDim2.new(1,-7,0,7)or UDim2.new(0,7,1,-7),
+		BackgroundTransparency=1,
+	},{ah})
+
+	return"Divider",{__type="Divider",ElementFrame=ai}
 end
 
 return ae end function a.L()
