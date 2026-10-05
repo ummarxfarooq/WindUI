@@ -389,28 +389,9 @@ local l
 if d:IsStudio()or not writefile then
 l=a.load'a'
 else
-local _p="WindUI/ic.lua"
-local _ok,_f,_r
-if isfile and isfile(_p)then
-_ok,_f=pcall(loadstring,readfile(_p))
-if _ok and _f then
-_ok,_r=pcall(_f)
-if _ok and _r then l=_r end
-end
-end
-if not l then
-local _s=game.HttpGetAsync and game:HttpGetAsync(j) or h:GetAsync(j)
-_ok,_f=pcall(loadstring,_s)
-if _ok and _f then
-pcall(function()
-if not isfolder"WindUI"then makefolder"WindUI"end
-writefile(_p,_s)
-end)
-_ok,l=pcall(_f)
-if not _ok then l=nil end
-end
-if not l then l=a.load'a'end
-end
+l=loadstring(
+game.HttpGetAsync and game:HttpGetAsync(j)or h:GetAsync(j)
+)()
 end
 
 l.SetIconsType"lucide"
@@ -4530,9 +4511,8 @@ end
 
 return aa end function a.y()
 
-local aa=(cloneref or clonereference or function(aa)
-return aa
-end)
+local aa=(cloneref or clonereference or function(aa)return aa end)
+
 
 local ab=aa(game:GetService"RunService")
 local ac=aa(game:GetService"HttpService")
@@ -4769,7 +4749,7 @@ end
 
 for am,an in next,(al.__elements or{})do
 if ai.Elements[am]and ae.Parser[an.__type]then
-task.defer(function()
+task.spawn(function()
 ae.Parser[an.__type].Load(ai.Elements[am],an)
 end)
 end
@@ -4814,6 +4794,7 @@ autoload=ai.AutoLoad
 }
 end
 
+
 if isfile(ai.Path)then
 local aj,ak=pcall(function()
 return ac:JSONDecode(readfile(ai.Path))
@@ -4822,16 +4803,20 @@ end)
 if aj and ak and ak.__autoload then
 ai.AutoLoad=true
 
-task.defer(function()
+task.spawn(function()
+task.wait(0.5)
 local al,am=pcall(function()
 return ai:Load()
 end)
-if not al then
+if al then
+if ad.Debug then print("[ WindUI.ConfigManager ] AutoLoaded config: "..ag)end
+else
 warn("[ WindUI.ConfigManager ] Failed to AutoLoad config: "..ag.." - "..tostring(am))
 end
 end)
 end
 end
+
 
 ai:SetAsCurrent()
 ae.Configs[ag]=ai
@@ -4905,7 +4890,7 @@ function ae.GetConfig(af,ag)
 return ae.Configs[ag]
 end
 
-return ae end
+return ae end function a.z()
 local aa={}
 
 local ab=a.load'c'
